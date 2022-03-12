@@ -32,6 +32,7 @@ public final class Scale {
     private LocalDate date;
     @NotNull
     private String minister;
+    @NotNull
     private String place;
 
     @Override
