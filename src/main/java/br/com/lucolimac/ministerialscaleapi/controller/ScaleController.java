@@ -40,9 +40,14 @@ public class ScaleController {
                                         @RequestBody Scale scale) {
         return scaleRepository.findById(id)
                 .map(record -> {
-                    record.setHour(scale.getHour());
-                    record.setDate(scale.getDate());
-                    record.setMinister(scale.getMinister());
+                    if (scale.getHour() != null)
+                        record.setHour(scale.getHour());
+                    if (scale.getDate() != null)
+                        record.setDate(scale.getDate());
+                    if (scale.getMinister() != null)
+                        record.setMinister(scale.getMinister());
+                    if (scale.getPlace() != null)
+                        record.setPlace(scale.getPlace());
                     Scale updated = scaleRepository.save(record);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
