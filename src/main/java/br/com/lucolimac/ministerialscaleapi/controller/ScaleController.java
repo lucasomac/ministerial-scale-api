@@ -5,6 +5,7 @@ import br.com.lucolimac.ministerialscaleapi.repository.ScaleRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -54,5 +55,12 @@ public class ScaleController {
                     scaleRepository.deleteById(id);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping()
+    public ResponseEntity<Scale> findByDate(@RequestParam LocalDate date) {
+        return scaleRepository.findByDate(date)
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
