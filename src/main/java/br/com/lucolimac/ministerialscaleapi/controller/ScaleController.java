@@ -58,7 +58,7 @@ public class ScaleController {
     }
 
     @GetMapping("byDate")
-    public ResponseEntity<Scale> findByDate(@RequestParam LocalDate date) {
+    public ResponseEntity<List<Scale>> findByDate(@RequestParam LocalDate date) {
         return scaleRepository.findByDate(date)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
