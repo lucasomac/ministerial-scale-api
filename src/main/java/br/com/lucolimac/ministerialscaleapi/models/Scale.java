@@ -32,6 +32,7 @@ public final class Scale {
     private LocalDate date;
     @NotNull
     private String minister;
+    private String place;
 
     @Override
     public boolean equals(Object o) {
