@@ -1,7 +1,10 @@
 package br.com.lucolimac.ministerialscaleapi.controller;
 
+import br.com.lucolimac.ministerialscaleapi.MinisterialScaleApiApplication;
 import br.com.lucolimac.ministerialscaleapi.models.Scale;
 import br.com.lucolimac.ministerialscaleapi.repository.ScaleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +16,7 @@ import java.util.List;
 public class ScaleController {
 
     private final ScaleRepository scaleRepository;
-
+    private static final Logger logger = LoggerFactory.getLogger(MinisterialScaleApiApplication.class);
     public ScaleController(ScaleRepository scaleRepository) {
         this.scaleRepository = scaleRepository;
     }
@@ -64,6 +67,7 @@ public class ScaleController {
 
     @GetMapping("byDate")
     public ResponseEntity<List<Scale>> findByDate(@RequestParam LocalDate date) {
+        logger.info("A data é: " + date);
         return scaleRepository.findByDate(date)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());

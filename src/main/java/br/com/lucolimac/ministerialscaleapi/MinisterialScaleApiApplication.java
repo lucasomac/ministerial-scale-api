@@ -10,6 +10,7 @@ public class MinisterialScaleApiApplication {
     private static final Logger logger = LoggerFactory.getLogger(MinisterialScaleApiApplication.class);
 
     public static void main(String[] args) {
+        logger.info("A aplicação Scale está rodando!");
         SpringApplication.run(MinisterialScaleApiApplication.class, args);
     }
 }
