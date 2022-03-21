@@ -5,6 +5,7 @@ import br.com.lucolimac.ministerialscaleapi.models.Scale;
 import br.com.lucolimac.ministerialscaleapi.repository.ScaleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,8 +67,7 @@ public class ScaleController {
     }
 
     @GetMapping("byDate")
-    public ResponseEntity<List<Scale>> findByDate(@RequestParam LocalDate date) {
-        logger.info("A data é: " + date);
+    public ResponseEntity<List<Scale>> findByDate(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate date) {
         return scaleRepository.findByDate(date)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
