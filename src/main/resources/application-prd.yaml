@@ -1,0 +1,21 @@
+#PRD environment
+environment:
+  message: This is the property file to the ${spring.application.name} specific to PRD environment
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${JDBC_DATABASE_URL}
+  jackson:
+    time-zone: America/Sao_Paulo
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
