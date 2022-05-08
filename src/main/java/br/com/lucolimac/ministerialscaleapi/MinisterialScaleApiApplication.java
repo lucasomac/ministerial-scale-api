@@ -15,5 +15,6 @@ public class MinisterialScaleApiApplication {
         logger.info("Starting application...");
         SpringApplication.run(MinisterialScaleApiApplication.class, args);
         logger.info("The application is running!");
+        logger.info("Heroku has deployed the application!");
     }
 }
