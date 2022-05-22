@@ -1,6 +1,7 @@
 package br.com.lucolimac.ministerialscaleapi.controller;
 
 import br.com.lucolimac.ministerialscaleapi.MinisterialScaleApiApplication;
+import br.com.lucolimac.ministerialscaleapi.exceptions.ScaleNotFoundException;
 import br.com.lucolimac.ministerialscaleapi.models.Scale;
 import br.com.lucolimac.ministerialscaleapi.repository.ScaleRepository;
 import org.slf4j.Logger;
@@ -13,11 +14,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("scales")
+@RequestMapping("api/v1/scales")
 public class ScaleController {
 
     private final ScaleRepository scaleRepository;
     private static final Logger logger = LoggerFactory.getLogger(MinisterialScaleApiApplication.class);
+
     public ScaleController(ScaleRepository scaleRepository) {
         this.scaleRepository = scaleRepository;
     }
@@ -31,7 +33,7 @@ public class ScaleController {
     public ResponseEntity<Scale> findById(@PathVariable long id) {
         return scaleRepository.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(ScaleNotFoundException::new);
     }
 
     @PostMapping
