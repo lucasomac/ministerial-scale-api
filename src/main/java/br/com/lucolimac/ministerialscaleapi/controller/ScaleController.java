@@ -42,8 +42,7 @@ public class ScaleController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<Scale> update(@PathVariable("id") long id,
-                                        @RequestBody Scale scale) {
+    public ResponseEntity<Scale> update(@PathVariable("id") long id, @RequestBody Scale scale) {
         return scaleRepository.findById(id)
                 .map(record -> {
                     if (scale.getHour() != null)
@@ -56,7 +55,7 @@ public class ScaleController {
                         record.setPlace(scale.getPlace());
                     Scale updated = scaleRepository.save(record);
                     return ResponseEntity.ok().body(updated);
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(ScaleNotFoundException::new);
     }
 
     @DeleteMapping(path = {"{id}"})
@@ -65,7 +64,7 @@ public class ScaleController {
                 .map(record -> {
                     scaleRepository.deleteById(id);
                     return ResponseEntity.ok().build();
-                }).orElse(ResponseEntity.notFound().build());
+                }).orElseThrow(ScaleNotFoundException::new);
     }
 
     @GetMapping("byDate")
