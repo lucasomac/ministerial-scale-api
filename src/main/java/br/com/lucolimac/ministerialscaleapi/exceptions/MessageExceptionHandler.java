@@ -1,23 +1,23 @@
 package br.com.lucolimac.ministerialscaleapi.exceptions;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class MessageExceptionHandler {
-    private Date timestamp;
+    private LocalDateTime timestamp;
     private Integer status;
     private String message;
 
-    public MessageExceptionHandler(Date timestamp, Integer status, String message) {
+    public MessageExceptionHandler(LocalDateTime timestamp, Integer status, String message) {
         this.timestamp = timestamp;
         this.status = status;
         this.message = message;
     }
 
-    public Date getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
