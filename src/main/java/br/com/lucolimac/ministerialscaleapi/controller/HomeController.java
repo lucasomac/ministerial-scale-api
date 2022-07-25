@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/")
 public class HomeController {
     @GetMapping
-    public ResponseEntity<Void> welcome() {
+    public ResponseEntity<Void> index() {
         return ResponseEntity
                 .status(HttpStatus.MOVED_PERMANENTLY)
-                .header(HttpHeaders.LOCATION, "/welcome.html")
+                .header(HttpHeaders.LOCATION, "/index.html")
                 .build();
     }
 }

@@ -1,20 +1,25 @@
 #DEV environment
 environment:
-  message: This is the property file to the ${spring.application.name} specific to DEV environment
+  message: This is the property file to the ${spring.application.name} specific to PRD environment
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
-    driver-class-name: org.h2.Driver
-    url: { ENV_DB_URL }
-    username: sa
-    password: sa
-  h2:
-    console:
-      enabled: true
+    driver-class-name: org.postgresql.Driver
+    url: ${DEV_DATABASE}
+    username: ${DEV_USER}
+    password: ${DEV_PASS}
   jackson:
     time-zone: America/Sao_Paulo
+  sql:
+    init:
+      mode: always
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+    generate-ddl: true
